@@ -1,0 +1,285 @@
+/* Simple CSS for the parking app - no PostCSS processing needed */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.subtitle {
+  color: #6b7280;
+  font-size: 1.1rem;
+}
+
+.message {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #dbeafe;
+  border: 1px solid #93c5fd;
+  color: #1e40af;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 5px;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 80px;
+  box-sizing: border-box;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+.btn-success {
+  background-color: #059669;
+  color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+  background-color: #047857;
+}
+
+.btn-danger {
+  background-color: #dc2626;
+  color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: #b91c1c;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.btn-group {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-group .btn {
+  flex: 1;
+}
+
+.info-highlight {
+  background-color: #f0fdf4;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.info-label {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 5px;
+}
+
+.info-value {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.info-section {
+  margin-bottom: 15px;
+}
+
+/* New time display styles */
+.time-display {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.time-display .icon {
+  color: #059669;
+  min-width: 24px;
+  height: 24px;
+}
+
+.time-display div {
+  flex: 1;
+}
+
+.time-display .info-value {
+  font-size: 0.95rem;
+}
+
+.map-container {
+  height: 400px;
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.map-loading {
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9fafb;
+  border-radius: 6px;
+  color: #6b7280;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.icon-lg {
+  width: 40px;
+  height: 40px;
+}
+
+/* Leaflet map styles */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
+
+.leaflet-popup-content {
+  margin: 8px;
+  text-align: center;
+}
+
+.leaflet-popup-content h3 {
+  margin: 0 0 8px 0;
+  font-weight: 600;
+}
+
+.leaflet-popup-content p {
+  margin: 4px 0;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .container {
+    padding: 15px;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .btn-group {
+    flex-direction: column;
+  }
+  
+  .btn-group .btn {
+    flex: none;
+  }
+}

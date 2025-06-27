@@ -1,0 +1,85 @@
+{
+  "expo": {
+    "name": "ParkSpot",
+    "slug": "parkspot",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#3b82f6"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "ParkSpot needs access to your location to save where you parked your car.",
+        "NSCameraUsageDescription": "ParkSpot needs access to your camera to take photos of your parking spot.",
+        "NSPhotoLibraryUsageDescription": "ParkSpot needs access to your photo library to select photos of your parking spot.",
+        "NSUserNotificationsUsageDescription": "ParkSpot will send you notifications when your parking time is about to expire."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#3b82f6"
+      },
+      "permissions": [
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow ParkSpot to use your location to save where you parked your car."
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "ParkSpot needs access to your camera to take photos of your parking spot."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "ParkSpot needs access to your photos to select images of your parking spot."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#3b82f6"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "28acbfff-eb3e-4df2-9bd6-cdb41ad18b1d"
+      }
+    },
+    "owner": "elli8ly",
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/28acbfff-eb3e-4df2-9bd6-cdb41ad18b1d"
+    },
+    "sdkVersion": "53.0.0"
+  }
+}

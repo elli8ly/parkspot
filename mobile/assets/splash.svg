@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1242" height="2436" viewBox="0 0 1242 2436">
+  <rect width="1242" height="2436" fill="#3b82f6" />
+  <circle cx="621" cy="1000" r="180" fill="#ffffff" />
+  <path d="M621 700 Q 621 700, 621 1000 L 621 1000 Q 400 1000, 400 1300 L 842 1300 Q 842 1000, 621 1000" fill="#ffffff" />
+  <rect x="400" y="1300" width="442" height="80" fill="#ffffff" />
+  <rect x="450" y="1380" width="80" height="140" rx="15" fill="#ffffff" />
+  <rect x="712" y="1380" width="80" height="140" rx="15" fill="#ffffff" />
+  <text x="621" y="1700" font-family="Arial" font-size="100" font-weight="bold" text-anchor="middle" fill="#ffffff">ParkSpot</text>
+  <text x="621" y="1800" font-family="Arial" font-size="40" font-weight="normal" text-anchor="middle" fill="#ffffff">Never forget where you parked again!</text>
+</svg> 

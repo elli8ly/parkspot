@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <rect width="1024" height="1024" fill="#3b82f6" />
+  <circle cx="512" cy="400" r="120" fill="#ffffff" />
+  <path d="M512 200 Q 512 200, 512 400 L 512 400 Q 350 400, 350 600 L 674 600 Q 674 400, 512 400" fill="#ffffff" />
+  <rect x="350" y="600" width="324" height="60" fill="#ffffff" />
+  <rect x="390" y="660" width="60" height="100" rx="10" fill="#ffffff" />
+  <rect x="574" y="660" width="60" height="100" rx="10" fill="#ffffff" />
+  <text x="512" y="800" font-family="Arial" font-size="120" font-weight="bold" text-anchor="middle" fill="#ffffff">ParkSpot</text>
+</svg> 
