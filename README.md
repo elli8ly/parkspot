@@ -1,8 +1,8 @@
-# 🚗 ParkSpot - Parking Location App
+# ParkSpot - Parking Location App
 
 A beautiful, full-stack web and mobile application that helps you remember where you parked your car. Never lose your car in a parking lot again!
 
-## ✨ Features
+## Features
 
 - **Save Current Location**: Instantly save your parking spot with GPS coordinates
 - **Interactive Map**: View your parking location on a beautiful, interactive map
