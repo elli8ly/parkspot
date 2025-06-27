@@ -4,17 +4,17 @@ A beautiful, full-stack web and mobile application that helps you remember where
 
 ## ✨ Features
 
-- **📍 Save Current Location**: Instantly save your parking spot with GPS coordinates
-- **🗺️ Interactive Map**: View your parking location on a beautiful, interactive map
-- **📝 Add Notes**: Include helpful notes like "Near the red car" or "Level 2, Section A"
-- **🧭 Get Directions**: One-click directions back to your car using Google Maps
-- **📱 Responsive Design**: Works perfectly on desktop and mobile devices
-- **🎨 Modern UI**: Beautiful, clean interface with professional design
-- **📱 Native Mobile App**: Dedicated iOS and Android apps available
-- **⏰ Parking Timer**: Set reminders for when your parking time is about to expire
-- **📸 Photo Capture**: Take photos of your parking spot to help you remember exactly where you parked
+- **Save Current Location**: Instantly save your parking spot with GPS coordinates
+- **Interactive Map**: View your parking location on a beautiful, interactive map
+- **Add Notes**: Include helpful notes like "Near the red car" or "Level 2, Section A"
+- **Get Directions**: One-click directions back to your car using Google Maps
+- **Responsive Design**: Works perfectly on desktop and mobile devices
+- **Modern UI**: Beautiful, clean interface with professional design
+- **Native Mobile App**: Dedicated iOS and Android apps available
+- **Parking Timer**: Set reminders for when your parking time is about to expire
+- **Photo Capture**: Take photos of your parking spot to help you remember exactly where you parked
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -83,7 +83,7 @@ If you prefer to set up manually:
 - **Expo Notifications** for parking timer reminders
 - **Native UI components** for the best mobile experience
 
-## 🌐 API Endpoints
+## API Endpoints
 
 - `GET /api/parking-spot` - Get current saved parking spot
 - `POST /api/parking-spot` - Save a new parking spot
@@ -110,14 +110,14 @@ If you prefer to set up manually:
 7. **Set a parking timer** to remind you when your parking time is about to expire
 8. **Get native map directions** back to your car
 
-## 🔒 Privacy & Security
+## Privacy & Security
 
 - Your location data is stored locally in an SQLite database
 - Photos are stored locally on your device and referenced in the database
 - No data is sent to external services except when using the "Get Directions" feature
 - Location and camera access is only requested when you use the app
 
-## 🤝 Contributing
+## Contributing
 
 This is a demo project, but feel free to fork and enhance it! Some ideas for improvements:
 
@@ -127,11 +127,11 @@ This is a demo project, but feel free to fork and enhance it! Some ideas for imp
 - Parking availability prediction
 - History of previous parking spots
 
-## 📄 License
+## License
 
 MIT License - Feel free to use this project for your own purposes!
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Location not working?
 - Make sure you've allowed location access in your browser or device
