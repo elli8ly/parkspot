@@ -61,7 +61,7 @@ If you prefer to set up manually:
    npm start
    ```
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Backend
 - **Node.js** with Express.js
@@ -90,7 +90,7 @@ If you prefer to set up manually:
 - `DELETE /api/parking-spot` - Clear current parking spot
 - `GET /api/health` - Health check endpoint
 
-## 📱 How to Use
+## How to Use
 
 ### Web App
 1. **Open the app** in your browser (http://localhost:3000)
