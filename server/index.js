@@ -72,7 +72,7 @@ app.get('/api/parking-spot', (req, res) => {
 // Save new parking spot
 app.post('/api/parking-spot', (req, res) => {
   console.log('POST /api/parking-spot', req.body);
-  const { latitude, longitude, address, notes, imageUri } = req.body;
+  const { latitude, longitude, address, notes, imageUri, timestamp } = req.body;
   
   if (!latitude || !longitude) {
     console.error('Missing required fields:', { latitude, longitude });
@@ -89,9 +89,17 @@ app.post('/api/parking-spot', (req, res) => {
     }
     console.log('Cleared old parking spots');
 
-    // Insert new parking spot
-    const query = 'INSERT INTO parking_spots (latitude, longitude, address, notes, imageUri) VALUES (?, ?, ?, ?, ?)';
-    const params = [latitude, longitude, address, notes, imageUri];
+    // Insert new parking spot with timestamp if provided
+    let query, params;
+    
+    if (timestamp) {
+      query = 'INSERT INTO parking_spots (latitude, longitude, address, notes, imageUri, timestamp) VALUES (?, ?, ?, ?, ?, ?)';
+      params = [latitude, longitude, address, notes, imageUri, timestamp];
+    } else {
+      query = 'INSERT INTO parking_spots (latitude, longitude, address, notes, imageUri) VALUES (?, ?, ?, ?, ?)';
+      params = [latitude, longitude, address, notes, imageUri];
+    }
+    
     console.log('Executing query:', query, 'with params:', params);
     
     db.run(query, params, function(err) {
@@ -107,6 +115,7 @@ app.post('/api/parking-spot', (req, res) => {
         address,
         notes,
         imageUri,
+        timestamp,
         message: 'Parking spot saved successfully!'
       };
       console.log('Saved new parking spot:', newSpot);
