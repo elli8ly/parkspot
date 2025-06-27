@@ -117,16 +117,6 @@ If you prefer to set up manually:
 - No data is sent to external services except when using the "Get Directions" feature
 - Location and camera access is only requested when you use the app
 
-## Contributing
-
-This is a demo project, but feel free to fork and enhance it! Some ideas for improvements:
-
-- User authentication for multiple users
-- Multiple parking spots support
-- Integration with parking payment systems
-- Parking availability prediction
-- History of previous parking spots
-
 ## License
 
 MIT License - Feel free to use this project for your own purposes!
