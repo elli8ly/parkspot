@@ -20,7 +20,11 @@
         "NSLocationWhenInUseUsageDescription": "ParkSpot needs access to your location to save where you parked your car.",
         "NSCameraUsageDescription": "ParkSpot needs access to your camera to take photos of your parking spot.",
         "NSPhotoLibraryUsageDescription": "ParkSpot needs access to your photo library to select photos of your parking spot.",
-        "NSUserNotificationsUsageDescription": "ParkSpot will send you notifications when your parking time is about to expire."
+        "NSUserNotificationsUsageDescription": "ParkSpot will send you notifications when your parking time is about to expire.",
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true,
+          "NSAllowsLocalNetworking": true
+        }
       }
     },
     "android": {

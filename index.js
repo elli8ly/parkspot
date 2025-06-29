@@ -8,27 +8,25 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5000;
 const JWT_SECRET = process.env.JWT_SECRET || 'parkspot-secret-key';
-
-// Use environment variable for database path or default to local file
-const DB_PATH = process.env.DATABASE_URL || path.join(__dirname, 'parking.db');
 
 // Middleware
 app.use(cors({
   // Allow requests from any origin in production
   origin: process.env.NODE_ENV === 'production' 
     ? true 
-    : ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://127.0.0.1:3002'],
+    : ['http://localhost:3000', 'http://localhost:3001', 'http://127.0.0.1:3000', 'http://127.0.0.1:3001'],
   methods: ['GET', 'POST', 'DELETE', 'PUT'],
   credentials: true
 }));
 app.use(bodyParser.json({ limit: '10mb' })); // Increased limit for image URIs
 
 // Database setup
-console.log('Database path:', DB_PATH);
+const dbPath = path.join(__dirname, 'parking.db');
+console.log('Database path:', dbPath);
 
-const db = new sqlite3.Database(DB_PATH, (err) => {
+const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error('Error opening database:', err);
     process.exit(1);
@@ -113,26 +111,6 @@ db.serialize(() => {
         });
       }
     });
-  });
-
-  // Create timer_data table for cross-platform timer synchronization
-  db.run(`CREATE TABLE IF NOT EXISTS timer_data (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER NOT NULL,
-    timer_end DATETIME NOT NULL,
-    timer_active BOOLEAN DEFAULT 1,
-    timer_hours TEXT,
-    timer_minutes TEXT,
-    notification_id TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id)
-  )`, (err) => {
-    if (err) {
-      console.error('Error creating timer_data table:', err);
-      process.exit(1);
-    }
-    console.log('Timer data table ready');
   });
 
   // Create a default admin user if none exists
@@ -313,10 +291,8 @@ app.post('/api/parking-spot', authenticateToken, (req, res) => {
 
     // Create a current timestamp with timezone offset included
     const now = new Date();
-    // Format as ISO string which is universally parseable
-    const currentTimestamp = timestamp || now.toISOString();
-    
-    console.log('Saving with timestamp:', currentTimestamp);
+    const currentTimestamp = timestamp || 
+      `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')} ${now.toString().match(/\(([^)]+)\)/)[1]}`;
     
     // Insert new parking spot with timestamp
     const query = 'INSERT INTO parking_spots (user_id, latitude, longitude, address, notes, imageUri, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)';
@@ -361,89 +337,10 @@ app.delete('/api/parking-spot', authenticateToken, (req, res) => {
   });
 });
 
-// Get timer data for authenticated user
-app.get('/api/timer-data', authenticateToken, (req, res) => {
-  console.log(`GET /api/timer-data for user ${req.user.id}`);
-  db.get(
-    'SELECT * FROM timer_data WHERE user_id = ? ORDER BY updated_at DESC LIMIT 1',
-    [req.user.id],
-    (err, row) => {
-      if (err) {
-        console.error('Error getting timer data:', err);
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      console.log('Retrieved timer data:', row);
-      res.json(row || null);
-    }
-  );
-});
-
-// Save timer data for authenticated user
-app.post('/api/timer-data', authenticateToken, (req, res) => {
-  console.log(`POST /api/timer-data for user ${req.user.id}`, req.body);
-  const { timer_end, timer_active, timer_hours, timer_minutes, notification_id } = req.body;
-  
-  if (!timer_end) {
-    console.error('Missing required field: timer_end');
-    res.status(400).json({ error: 'Timer end time is required' });
-    return;
-  }
-
-  // Clear previous timer data for this user
-  db.run('DELETE FROM timer_data WHERE user_id = ?', [req.user.id], (err) => {
-    if (err) {
-      console.error('Error deleting old timer data:', err);
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    console.log(`Cleared old timer data for user ${req.user.id}`);
-
-    // Insert new timer data
-    const query = 'INSERT INTO timer_data (user_id, timer_end, timer_active, timer_hours, timer_minutes, notification_id) VALUES (?, ?, ?, ?, ?, ?)';
-    const params = [req.user.id, timer_end, timer_active ? 1 : 0, timer_hours, timer_minutes, notification_id];
-    
-    console.log('Executing query:', query, 'with params:', params);
-    
-    db.run(query, params, function(err) {
-      if (err) {
-        console.error('Error inserting timer data:', err);
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      const newTimerData = {
-        id: this.lastID,
-        user_id: req.user.id,
-        timer_end,
-        timer_active: timer_active ? 1 : 0,
-        timer_hours,
-        timer_minutes,
-        notification_id,
-        message: 'Timer data saved successfully!'
-      };
-      console.log('Saved timer data:', newTimerData);
-      res.json(newTimerData);
-    });
-  });
-});
-
-// Delete timer data for authenticated user
-app.delete('/api/timer-data', authenticateToken, (req, res) => {
-  console.log(`DELETE /api/timer-data for user ${req.user.id}`);
-  db.run('DELETE FROM timer_data WHERE user_id = ?', [req.user.id], function(err) {
-    if (err) {
-      console.error('Error deleting timer data:', err);
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    console.log(`Deleted timer data for user ${req.user.id}`);
-    res.json({ message: 'Timer data cleared successfully!' });
-  });
-});
-
-// Health check endpoint for deployment
+// Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+  console.log('GET /api/health');
+  res.json({ status: 'OK', message: 'Parking API is running!' });
 });
 
 // Error handling middleware

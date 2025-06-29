@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Clear Timer Data</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    button {
+      padding: 10px;
+      margin: 10px 0;
+      background-color: #f97316;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f1f5f9;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Clear ParkSpot Timer Data</h1>
+  
+  <div>
+    <h3>Clear Timer Data for Specific User</h3>
+    <input type="text" id="userId" placeholder="User ID">
+    <button onclick="clearTimerForUser()">Clear Timer Data</button>
+  </div>
+  
+  <div>
+    <h3>Clear All Timer Data</h3>
+    <button onclick="clearAllTimerData()">Clear All Timer Data</button>
+  </div>
+  
+  <div>
+    <h3>Show All LocalStorage Data</h3>
+    <button onclick="showAllData()">Show All Data</button>
+  </div>
+  
+  <div class="result" id="result"></div>
+  
+  <script>
+    function clearTimerForUser() {
+      const userId = document.getElementById('userId').value;
+      if (!userId) {
+        document.getElementById('result').innerHTML = 'Please enter a user ID';
+        return;
+      }
+      
+      const keyPrefix = `parkspot_timer_${userId}_`;
+      localStorage.removeItem(`${keyPrefix}end`);
+      localStorage.removeItem(`${keyPrefix}active`);
+      localStorage.removeItem(`${keyPrefix}hours`);
+      localStorage.removeItem(`${keyPrefix}minutes`);
+      
+      document.getElementById('result').innerHTML = `Timer data cleared for user ID: ${userId}`;
+    }
+    
+    function clearAllTimerData() {
+      const keysToRemove = [];
+      
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.includes('parkspot_timer_')) {
+          keysToRemove.push(key);
+        }
+      }
+      
+      keysToRemove.forEach(key => localStorage.removeItem(key));
+      
+      document.getElementById('result').innerHTML = `Cleared ${keysToRemove.length} timer-related items from localStorage`;
+    }
+    
+    function showAllData() {
+      let html = '<h4>All LocalStorage Data:</h4>';
+      
+      if (localStorage.length === 0) {
+        html += '<p>No data in localStorage</p>';
+      } else {
+        html += '<ul>';
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          let value = localStorage.getItem(key);
+          
+          // Truncate long values
+          if (value.length > 50) {
+            value = value.substring(0, 50) + '...';
+          }
+          
+          html += `<li><strong>${key}</strong>: ${value}</li>`;
+        }
+        html += '</ul>';
+      }
+      
+      document.getElementById('result').innerHTML = html;
+    }
+  </script>
+</body>
+</html> 
