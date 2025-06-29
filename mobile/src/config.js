@@ -10,8 +10,8 @@ const config = {
   }
 };
 
-// Force production mode for mobile app to use Render server
-const environment = 'production';
+// Use development mode to connect to local server
+const environment = __DEV__ ? 'development' : 'production';
 
 // Export the appropriate config
 export const API_URL = config[environment].API_URL;
