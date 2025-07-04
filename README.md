@@ -152,7 +152,3 @@ MIT License - Feel free to use this project for your own purposes!
 - Update the API_URL in mobile/App.js to your computer's local IP address
 - Make sure your phone and computer are on the same network
 - Check that the backend server is running
-
----
-
-Made with ❤️ for people who always forget where they parked! 
