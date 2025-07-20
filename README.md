@@ -119,36 +119,4 @@ If you prefer to set up manually:
 
 ## License
 
-MIT License - Feel free to use this project for your own purposes!
-
-## Troubleshooting
-
-### Location not working?
-- Make sure you've allowed location access in your browser or device
-- Try refreshing the page and allowing location access again
-- Check that you're on HTTPS or localhost (required for geolocation)
-
-### Map not loading?
-- Check your internet connection
-- Try refreshing the page
-- Make sure the backend server is running on port 5000
-
-### Camera not working?
-- Make sure you've allowed camera permissions on your device
-- Try restarting the app
-- Use a physical device instead of an emulator for better camera support
-
-### Notifications not working?
-- Make sure notifications are enabled for the app in your device settings
-- Try setting a longer timer (at least a few minutes) for testing
-- Use a physical device as emulators may not support notifications properly
-
-### Backend errors?
-- Ensure the server is running on port 5000
-- Check the terminal for any error messages
-- Try restarting the backend server
-
-### Mobile app not connecting to API?
-- Update the API_URL in mobile/App.js to your computer's local IP address
-- Make sure your phone and computer are on the same network
-- Check that the backend server is running
+MIT License - Feel free to use this project for your own purposes
